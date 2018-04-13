@@ -171,8 +171,9 @@ var infoGet = new Vue({
 console.log(infoGet.objBrowser);
 getInfoFromServer();
 function getInfoFromServer() {
-    axios.post('/', { ClientInfo: true }).then(function (err, data) {
-        myVue.objServer = data;
+    axios.post('/', { ClientInfo: '00999' }).then(function (data) {
+        console.log(data);
+        infoGet.objServer = data.data;
 //        console.log(data);
     });
 };

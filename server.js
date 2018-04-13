@@ -1,6 +1,6 @@
 
 'use strict';
-
+const bodyParser = require("body-parser");
 var fs = require('fs');
 var express = require('express');
 var app = express();
@@ -28,25 +28,30 @@ app.route('/_api/package.json')
       res.type('txt').send(data.toString());
     });
   });
-  
-app.route('/')
-    .get(function(req, res) {
-      console.log('haha');
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
 
-    })
-    .post(function(req,res){
+/**bodyParser.json(options)
+ * Parses the text as JSON and exposes the resulting object on req.body.
+ */
+app.use(bodyParser.json());
+
+app.use('/', express.static(process.cwd()));
+app.post('/',function(req,res) {
+      
       let obj = {'unix':null, 'natural':null};
-      obj = req.body.data;
-      console.log('get1:',obj);
+      console.log(1);
+      let od = req.body.ClientInfo;
+      console.log(2);
+       console.log('get1:',od);
       res.end(JSON.stringify(obj));  
     });
 
 // Respond not found to all the wrong routes
 app.use(function(req, res, next){
-  let obj = {'unix':null, 'natural':null};
-  obj = req.body.data;
-  console.log('get:',obj);
-  res.end(JSON.stringify(obj));  
+  console.log('strange');
+  res.end('Nothing happened');  
   next();
 });
 
