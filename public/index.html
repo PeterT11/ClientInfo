@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  <meta charset="UTF-8">
+  <title>computer information/vue+vuetify</title>
+  
+  
+  <link rel='stylesheet prefetch' href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons'>
+<link rel='stylesheet prefetch' href='https://unpkg.com/vuetify@1.0.13/dist/vuetify.min.css'>
+
+      <link rel="stylesheet" href="style.css">
+
+  
+</head>
+
+<body>
+
+  <div id='objectDisplay'>
+  <v-app dark>
+  <v-layout row wrap >
+    <v-flex  row class = 'compareList'>
+        <v-list two-line class='elevation-1 listItem '>
+          <h2 class = 'infoHeader'> {{objBrowser.os}}</h2>
+
+          <template v-for="(value, key,index) in objBrowser">           
+          <v-divider> </v-divider>
+            <v-list-tile color="blue lighten-1">              
+                <v-list-tile-title class='objectItem'>
+                  <div class='objKey'>{{key}}</div>
+                  <div class="objValue">{{value}}</div>
+                </v-list-tile-title>              
+            </v-list-tile>
+
+       </template>
+        </v-list>
+    </v-flex>
+    
+    <v-flex  row class = 'compareList'>
+        <v-list two-line class='listItem elevation-1'>
+          <h2 class = 'infoHeader'> Information from your server</h2>
+          <template v-for="(value, key,index) in objServer"> 
+                                <v-divider></v-divider>
+            <v-list-tile color="blue lighten-1">              
+                <v-list-tile-title class='objectItem'>
+                  <div class='objKey'>{{key}}</div>
+                  <div class="objValue">{{value}}</div>
+                </v-list-tile-title>              
+            </v-list-tile>
+       </template>
+        </v-list>
+    </v-flex>
+
+  </v-layout>
+    </v-app>
+</div>
+  <script src='https://unpkg.com/babel-polyfill/dist/polyfill.min.js'></script>
+<script src='https://unpkg.com/vue/dist/vue.js'></script>
+<script src='https://unpkg.com/vuetify@1.0.13/dist/vuetify.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js'></script>
+
+  
+
+    <script  src="index.js"></script>
+
+
+
+
+</body>
+
+</html>

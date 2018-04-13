@@ -1,0 +1,25 @@
+.compareList{
+  vertical-align:bottom;
+}
+
+#objectDisplay{
+  width: 80%;
+  min-width: 20em;
+  margin: auto;
+}
+.listItem{
+  margin:auto;
+  width:100%;
+}
+.objectItem{
+  width:100%;  
+  display:flex;
+  justify-content: space-between;
+}
+.objKey{
+  font:italic 1em Georgia, serif;
+}
+.objValue{  
+  font: 1.5em bold;
+  color:lightblue;
+}
