@@ -21,7 +21,7 @@
   <v-layout row wrap >
     <v-flex  row class = 'compareList'>
         <v-list two-line class='elevation-1 listItem '>
-          <h2 class = 'infoHeader'> {{objBrowser.os}}</h2>
+          <h2 class = 'infoHeader'> From your Browser</h2>
 
           <template v-for="(value, key,index) in objBrowser">           
           <v-divider> </v-divider>
@@ -38,7 +38,7 @@
     
     <v-flex  row class = 'compareList'>
         <v-list two-line class='listItem elevation-1'>
-          <h2 class = 'infoHeader'> Information from your server</h2>
+          <h2 class = 'infoHeader'> From your server</h2>
           <template v-for="(value, key,index) in objServer"> 
                                 <v-divider></v-divider>
             <v-list-tile color="blue lighten-1">              
@@ -58,6 +58,7 @@
 <script src='https://unpkg.com/vue/dist/vue.js'></script>
 <script src='https://unpkg.com/vuetify@1.0.13/dist/vuetify.min.js'></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/fetch-jsonp/1.1.3/fetch-jsonp.js'></script>
 
   
 

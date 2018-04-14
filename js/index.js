@@ -3,10 +3,9 @@ var infoGet = new Vue({
     data: {
         objBrowser: {},
         objServer: {
-            CPU: 'intel i7',
-            Browser: 'Chrome',
-            Ip: '1.2.3.4'
-        }
+            Info: 'Loading...!'
+        },
+        a:{},
 
     }
 });
@@ -157,7 +156,6 @@ var infoGet = new Vue({
 
         }
     }
-
     infoGet.objBrowser = {
         screen: screenSize,
         browser: browser,
@@ -169,11 +167,32 @@ var infoGet = new Vue({
     };
 })(this);
 console.log(infoGet.objBrowser);
-getInfoFromServer();
+
 function getInfoFromServer() {
-    axios.post('/', { ClientInfo: '00999' }).then(function (data) {
-        console.log(data);
-        infoGet.objServer = data.data;
-//        console.log(data);
+    axios.post('/', { ClientInfo: '00999' }).then(function (result) {
+
+        infoGet.a = result.data;        
     });
 };
+
+getInfoFromServer();
+
+fetchJsonp('https://api.ipdata.co')
+.then(function(response) {
+  return response.json()
+}).then(function(json) {
+    console.log('NO?',infoGet.objServer);
+    
+    infoGet.a.City = json.city;
+    infoGet.a.ip = json.ip;
+    infoGet.a.Supplier = json.organisation;       
+    infoGet.objServer =infoGet.a;
+
+  console.log('final', infoGet.objServer)
+}).catch(function(ex) {
+  console.log('parsing failed', ex)
+});
+
+ 
+
+console.log('Server:',infoGet.objServer);

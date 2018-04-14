@@ -7,10 +7,11 @@ var app = express();
 
 if (!process.env.DISABLE_XORIGIN) {
   app.use(function(req, res, next) {
+
     var allowedOrigins = ['https://narrow-plane.gomix.me', 'https://www.freecodecamp.com'];
     var origin = req.headers.origin || '*';
     if(!process.env.XORIG_RESTRICT || allowedOrigins.indexOf(origin) > -1){
-         console.log(origin);
+         console.log('Origin:',origin);
          res.setHeader('Access-Control-Allow-Origin', origin);
          res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     }
@@ -40,11 +41,16 @@ app.use(bodyParser.json());
 app.use('/', express.static(process.cwd()));
 app.post('/',function(req,res) {
       
-      let obj = {'unix':null, 'natural':null};
-      console.log(1);
-      let od = req.body.ClientInfo;
-      console.log(2);
-       console.log('get1:',od);
+      let obj = {};
+      obj.Ip = req.ip;
+      if(obj.Ip.indexOf('::')!==-1)
+        obj.Ip = 'Local loop';
+      let os = req.headers['user-agent'];
+      obj.os =/\(([^\)]*)\)/.exec(os)[1];
+      console.log('header:',os,obj.os);
+      obj.language=req.headers['accept-language'];
+      //console.log(6);
+      // console.log('get1:',obj);
       res.end(JSON.stringify(obj));  
     });
 
