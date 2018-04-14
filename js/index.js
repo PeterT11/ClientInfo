@@ -172,27 +172,27 @@ function getInfoFromServer() {
     axios.post('/', { ClientInfo: '00999' }).then(function (result) {
 
         infoGet.a = result.data;        
-    });
+    }).then(getOtherInformation);
 };
 
 getInfoFromServer();
+function getOtherInformation(){
+    fetchJsonp('https://api.ipdata.co')
+    .then(function(response) {
+    return response.json()
+    }).then(function(json) {
+        console.log('NO?',infoGet.objServer);
+        
+        infoGet.a.City = json.city;
+        infoGet.a.ip = json.ip;
+        infoGet.a.Supplier = json.organisation;       
+        infoGet.objServer =infoGet.a;
 
-fetchJsonp('https://api.ipdata.co')
-.then(function(response) {
-  return response.json()
-}).then(function(json) {
-    console.log('NO?',infoGet.objServer);
-    
-    infoGet.a.City = json.city;
-    infoGet.a.ip = json.ip;
-    infoGet.a.Supplier = json.organisation;       
-    infoGet.objServer =infoGet.a;
-
-  console.log('final', infoGet.objServer)
-}).catch(function(ex) {
-  console.log('parsing failed', ex)
-});
-
+    console.log('final', infoGet.objServer)
+    }).catch(function(ex) {
+    console.log('parsing failed', ex)
+    });
+}
  
 
 console.log('Server:',infoGet.objServer);
